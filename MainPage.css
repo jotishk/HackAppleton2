@@ -1,0 +1,10 @@
+.header {
+  
+  border-bottom: 1px;
+  border-bottom-color: rgb(154, 154, 154);
+  border-bottom-style: solid;
+  height: 80px;
+  margin-left: -20px;
+  margin-top: -10px;
+  width: 1600px;
+}
