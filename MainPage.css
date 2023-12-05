@@ -1,5 +1,4 @@
 .header {
-  
   border-bottom: 1px;
   border-bottom-color: rgb(154, 154, 154);
   border-bottom-style: solid;
@@ -8,3 +7,35 @@
   margin-top: -10px;
   width: 1600px;
 }
+.search-bar {
+  margin-top: 300px;
+  margin-left: 350px;
+  height: 60px;
+  width: 800px;
+  border-radius: 30px;
+  border-width: 1px;
+  padding-left: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+.search-button {
+  position: absolute;
+  width: 80px;
+  border: none;
+  height: 60px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  top: 380px;
+  left: 1100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.search-image {
+  width: 30px;
+  opacity: 0.2;
+} 
