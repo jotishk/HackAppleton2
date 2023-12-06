@@ -50,13 +50,15 @@
 .username {
   font-family:'Roboto', sans-serif;
   font-size: 15px;
-  margin-left: 50px;
+  margin-left: 100px;
   color: rgb(181, 181, 181);
 }
 .profile {
   background-color: yellow;
   height: 60px;
-  margin-left: 1207px;
-  width: 250px;
-
+  margin-left: 1157px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  
 }
