@@ -2,10 +2,13 @@
   border-bottom: 1px;
   border-bottom-color: rgb(154, 154, 154);
   border-bottom-style: solid;
-  height: 80px;
+  height: 60px;
   margin-left: -20px;
   margin-top: -10px;
   width: 1600px;
+  display: flex;
+  
+  align-items: center;
 }
 .search-bar {
   margin-top: 300px;
@@ -39,3 +42,8 @@
   width: 30px;
   opacity: 0.2;
 } 
+.logo-name {
+  font-family:'Roboto', sans-serif;
+  font-size: 15px;
+  margin-left: 50px;
+}
