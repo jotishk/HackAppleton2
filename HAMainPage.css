@@ -75,10 +75,48 @@
 }
 .side-bar {
   position: fixed;
-  background-color: rgb(20, 20, 76);
+  background-color: rgb(35, 35, 36);
   top:59px;
   left: 0px;
   bottom: 0px;
-  width: 200px;
+  width: 250px;
   height: 700px;
+}
+.dashboard-button {
+  top: 30px;
+  right: 0px;
+  left: 0px;
+  
+  position: absolute;
+  background-color: rgb(61, 198, 198);
+  border: none;
+  font-size: 15px;
+  color: white;
+  font-family:'Roboto', sans-serif;
+  font-weight:bold;
+  text-decoration: none;
+  padding-left: 30px;
+ 
+  height: 50px;
+}
+.side-bar-text {
+  position: relative;
+  top: 17px;
+}
+.create-button {
+  top: 80px;
+  right: 0px;
+  left: 0px;
+  
+  position: absolute;
+  background-color: rgb(35, 35, 36);
+  border: none;
+  font-size: 15px;
+  color: white;
+  font-family:'Roboto', sans-serif;
+  font-weight:bold;
+  text-decoration: none;
+  padding-left: 30px;
+ 
+  height: 50px;
 }
