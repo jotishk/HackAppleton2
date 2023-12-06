@@ -5,23 +5,31 @@
   </head>
   <body>
     <div class = "header">
-      <p class = "logo-name">{Website Name}</p>
+      <p class = "logo-name">Website Name</p>
+      <button class="search-button">
+      <img class = "search-image" src = "595474_search_512x512.png">
+      </button>
+      <input class = "search-bar" placeholder="Search">  
       <div class = "profile">
+        <img class = "profile-image" src = "EmptyAvatar.jpg">
         <p class = "username"></p>
       </div>
     </div> 
-    <!-- <button class="search-button">
-      <img class = "search-image" src = "595474_search_512x512.png">
-    </button> -->
-    <!-- <input class = "search-bar" placeholder="What are you looking for?"> -->
+    <div class = "side-bar">
+      <div>
+        <img>
+        <button class = "dashboard-button"></button>
+      </div>
+      
+    </div>
   </body>
   <script>
     let isSignedIn = true;
     const usernameElement = document.querySelector(".username");
-    usernameElement.innerHTML = "TestAccount1";
+    let username = "TestAccount1"
     
     if (isSignedIn) {
-      
+      usernameElement.innerText = username;
     }
   </script>
 </hmtl>
