@@ -9,6 +9,10 @@
   display: flex;
   background-color: white;
   align-items: center;
+  position: fixed;
+  top: 9px;
+  left: 0px;
+  right: 0px;
 }
 .search-bar {
   
@@ -47,6 +51,8 @@
 .search-image {
   width: 30px;
   opacity: 0.2;
+  margin-left: 20px;
+  margin-top: 2px;
 } 
 .logo-name {
   font-family:'Roboto', sans-serif;
@@ -143,6 +149,7 @@
 .title-text {
   margin-left: 35px;
   font-size: 30px;
+  margin-top: 88px;
   font-family:'Roboto', sans-serif;
 }
 .title-input {
