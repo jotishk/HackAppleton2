@@ -10,9 +10,6 @@
   background-color: white;
   align-items: center;
 }
-body {
-  background-color: rgb(242, 242, 242);
-}
 .search-bar {
   
   height: 40px;
@@ -20,13 +17,12 @@ body {
   border-radius: 30px;
   border-width: 1px;
   padding-left: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: none;
-  /* border: black 1px solid; */
   outline: none;
   font-size: 20px;
   margin-left: 200px;
   padding-left: 70px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .search-bar:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -78,13 +74,13 @@ body {
   margin-left: 80px;
 }
 .side-bar {
-  position: fixed;
+  position: absolute;
   background-color: rgb(35, 35, 36);
   top:59px;
   left: 0px;
-  bottom: 0px;
+  
   width: 250px;
-  height: 700px;
+  height: 680px;
 }
 .dashboard-button {
   top: 30px;
@@ -92,7 +88,7 @@ body {
   left: 0px;
   
   position: absolute;
-  background-color: rgb(61, 198, 198);
+  background-color: rgb(35, 35, 36);
   border: none;
   font-size: 15px;
   color: white;
@@ -112,7 +108,7 @@ body {
   right: 0px;
   left: 0px;
   position: absolute;
-  background-color: rgb(35, 35, 36);
+  background-color: rgb(61, 198, 198);
   border: none;
   font-size: 15px;
   color: white;
@@ -136,4 +132,73 @@ body {
   text-decoration: none;
   padding-left: 30px;
   height: 50px;
+}
+.addpost-box {
+  
+  width: 1288px;
+  height: 672px;
+  margin-left: 240px;
+
+}
+.title-text {
+  margin-left: 35px;
+  font-size: 30px;
+  font-family:'Roboto', sans-serif;
+}
+.title-input {
+  display: block;
+  margin-left: 35px;
+  width: 900px;
+  height: 30px;
+  font-size: 20px;
+  font-family:'Roboto', sans-serif;
+}
+.text-box {
+  margin-top: 50px;
+  margin-left: 35px;
+  width: 900px;
+  height: 400px;
+  font-size: 15px;
+  font-family:'Roboto', sans-serif;
+}
+.submit-box {
+  position: absolute;
+  background-color: white;
+  top: 153px;
+  left: 1220px;
+  width: 280px;
+  height: 140px;
+  border: black 1px solid;
+}
+.publish-text {
+  margin-left: 10px;
+  font-family:'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+}
+.publish-text-box {
+  border-bottom: 1px gray solid;
+}
+.save-button {
+  height:30px;
+  width: 80px;
+  font-family:'Roboto', sans-serif;
+  margin-left: 50px;
+  margin-top: 25px;
+}
+.save-button:hover {
+  cursor: pointer;
+}
+.publish-button {
+  height:30px;
+  width: 80px;
+  font-family:'Roboto', sans-serif;
+  margin-left: 20px;
+  background-color: rgb(83, 178, 255);
+  border: none;
+  color: white;
+}
+body {
+  background-color: rgb(242, 242, 242);
+  overflow: hidden;
 }
