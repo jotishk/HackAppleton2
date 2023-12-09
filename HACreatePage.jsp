@@ -54,7 +54,7 @@
         String DiscussionOwner = "TestAccount1";
         String DiscussionTitle = request.getParameter("title-input");
         String DiscussionContent = request.getParameter("content-input");
-        int DiscussionID = (int)(Math.random() *1000);
+        int DiscussionID = (int)(Math.random() *100000);
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
         PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionContent, DiscussionID) values (?,?,?,?)");

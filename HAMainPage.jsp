@@ -3,10 +3,36 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
 <%
+  ArrayList<Integer> discussions = new ArrayList<>();
+  ArrayList<String[]> discussionAndComments = new ArrayList<>();
+  ArrayList<Integer> topDiscussions = new ArrayList<>();
+
   try {
     Class.forName("oracle.jdbc.driver.OracleDriver");
     Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");
 
+    Statement stmt = c.createStatement();
+    ResultSet DBDiscussionIDs = stmt.executeQuery("select DiscussionID from HADiscussions");
+    
+    while (DBDiscussionIDs.next()) {
+      discussions.add(DBDiscussionIDs.getInt("DiscussionID"));
+    }
+
+    for (int i: discussions) {
+      PreparedStatement pstmt = c.prepareStatement("select Count(*) as commentCount from HAComments where DiscussionID = ?");
+      pstmt.setInt(1,i);
+      ResultSet amountOfComments = pstmt.executeQuery();
+      if (amountOfComments.next()) {
+        discussionAndComments.add(new String[]{String.valueOf(i), String.valueOf(amountOfComments.getInt("commentCount"))});
+      }
+      
+      
+
+      amountOfComments.close();
+      pstmt.close();
+    }
+   
+    
   } catch (Exception e) {
     System.out.println(e);
   }

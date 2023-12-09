@@ -145,7 +145,7 @@ body {
 }
 .discussion-box {
   width: 800px;
-  height: 800px;
+  height: 1500px;
   background-color: white;
   margin-left: 450px;
   margin-top: 100px;
@@ -239,10 +239,11 @@ body {
 }
 .create-comment-box {
   width: 720px;
-  height: 80px;
+  height: 120px;
   margin-top: -10px;
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 .your-comment-profile-image {
   width: 50px;
@@ -265,5 +266,20 @@ body {
 .create-comment-input:focus {
   border-bottom: 3px black solid;
 }
+.post-button {
+  position: relative;
+  top: 30px;
+  left: -3px;
+  margin-left: 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-family:'Roboto', sans-serif;
+}
+
 
 

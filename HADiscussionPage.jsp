@@ -4,13 +4,18 @@
   String articleTitle = "";
   String author = "";
   String article = "";
+  ArrayList<String[]> commentsList = new ArrayList<>();
+
   try {
     
     Class.forName("oracle.jdbc.driver.OracleDriver");
     Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");
 
     Statement stmt = c.createStatement();
+    Statement stmt2 = c.createStatement();
+
     ResultSet discussions = stmt.executeQuery("select * from HADiscussions");
+    ResultSet DBcomments = stmt2.executeQuery("select * from HAComments");
     while (discussions.next()) {
       if (Integer.parseInt(articleID) == discussions.getInt("DiscussionID")) {
         articleTitle = discussions.getString("DiscussionTitle");
@@ -18,6 +23,12 @@
         article = discussions.getString("DiscussionContent");
       }
     }
+
+    
+    while (DBcomments.next()) {
+      commentsList.add(new String[]{DBcomments.getString("CommenterName"), DBcomments.getString("CommentText")});
+    }
+    
   } catch (Exception e) {
     System.out.println(e);
   }
@@ -26,6 +37,9 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.text.*" %>
+<%@ page import="java.collection.*" %>
+
+
 <html>
   <head>
     <link rel = "stylesheet" href = "HADiscussionPage.css">
@@ -67,17 +81,41 @@
           </form>
           
         </div>
-        <div class = "article-comment">
-          <img class = "comment-profile-image" src = "EmptyAvatar.jpg">
-          <div class = "comment-content">
-            <p style = "margin: 5px; font-weight: 600; font-family:'Roboto', sans-serif;">Test Username</p>
-            <p style = "margin: 5px; font-family:'Roboto', sans-serif;"   class = "comment-text">Test Text</p>
-          </div>
-        </div>
+          <% for (String[] s: commentsList) { %>
+            <div class = "article-comment">
+              <img class = "comment-profile-image" src = "EmptyAvatar.jpg">
+              <div class = "comment-content">
+                <p style = "margin: 5px; font-weight: 600; font-family:'Roboto', sans-serif;"><%=s[0]%></p>
+                <p style = "margin: 5px; font-family:'Roboto', sans-serif;"   class = "comment-text"><%=s[1]%></p>
+              </div>
+            </div>
+          <% } %>
       </div>
       
     </div>
   </body>
+  <%
+    if (request.getMethod().equalsIgnoreCase("POST")) {
+      try { 
+        
+        String CommentContent = request.getParameter("comment-input");
+        String CommenterName = "TestAccount1";
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
+        PreparedStatement pstmt = c.prepareStatement("insert into HAComments(DiscussionID,CommenterName,CommentText) values (?,?,?)");
+        pstmt.setInt(1,Integer.parseInt(articleID));
+        pstmt.setString(2, CommenterName);
+        pstmt.setString(3,CommentContent);
+        
+        pstmt.executeUpdate();
+        c.commit();
+        
+        c.close();
+      } catch(Exception e) {
+        System.out.println(e);
+      }
+    }
+  %>
   <script>
     let isSignedIn = true;
     const usernameElement = document.querySelector(".username");
@@ -85,15 +123,19 @@
     const commentInput = document.querySelector(".create-comment-input");
     let postButton = document.createElement("input");
     postButton.className = "post-button";
-
+    postButton.type = "submit";
+    postButton.value = "Comment"
     commentInput.addEventListener("focus", function() {
       document.querySelector(".create-comment-form").appendChild(postButton);
     });
     commentInput.addEventListener("blur", function() {
-      document.querySelector(".create-comment-form").removeChild(postButton);
+      setTimeout(function() {
+        document.querySelector(".create-comment-form").removeChild(postButton);
+      },200);
+      
     });
     if (isSignedIn) {
       usernameElement.innerText = username;
     }
   </script>
-</hmtl>
+</html>
