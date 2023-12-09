@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.text.*" %>
 <%
   try {
     Class.forName("oracle.jdbc.driver.OracleDriver");
     Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");
-    
-  } catch (Exception e) {
 
+  } catch (Exception e) {
+    System.out.println(e);
   }
 %>
 <html>
@@ -25,8 +28,8 @@
       </div>
     </div> 
     <div class = "side-bar">
-      <a class = "dashboard-button" href = "HAMainPage.html"><span class = "side-bar-text">Dashboard</span></a>
-      <a class = "create-button" href = "HACreatePage.html"><span class = "side-bar-text">Create</span></a>
+      <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
+      <a class = "create-button" href = "HACreatePage.jsp"><span class = "side-bar-text">Create</span></a>
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
     </div>
     <div class = "dashboard-box">

@@ -166,6 +166,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 20px;
+  align-self: flex-end;
 }
 .article-details {
   margin-left: 40px;  
@@ -173,6 +174,7 @@ body {
   margin-top: 20px;
   width: 720px;
   height: 120px;
+  
 }
 .article-title {
   font-family:'Roboto', sans-serif;
@@ -180,13 +182,18 @@ body {
   font-weight: bold;
   font-size: 30px;
 }
+.author-details {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+}
 .owner-username {
   font-family:'Roboto', sans-serif;
-  display: inline-block;
-  position: absolute;
-  top: 611px;
+  
   margin-left: 10px;
   color: gray;
+  align-items: center;
+
 }
 .body-text {
   width: 720px;
@@ -195,3 +202,38 @@ body {
   color: rgb(25, 25, 25);
   line-height: 40px;
 }
+.comment-title {
+  font-family:'Roboto', sans-serif;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 30px;
+}
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;  
+  margin-top: 20px;
+  width: 720px;
+  
+  background-color: yellow;
+}
+.article-comment {
+  width: 720px;
+  height: 80px;
+  background-color: green;
+  display: flex;
+  align-items: center;
+}
+.comment-profile-image {
+  width: 50px;
+  height:50px;
+  border-radius: 25px;
+   
+}
+.comment-content {
+  margin-left: 10px;
+}
+.comment-text {
+ 
+}
+

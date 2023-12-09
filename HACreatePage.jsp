@@ -20,8 +20,8 @@
       </div>
     </div> 
     <div class = "side-bar">
-      <a class = "dashboard-button" href = "HAMainPage.html"><span class = "side-bar-text">Dashboard</span></a>
-      <a class = "create-button" href = ""><span class = "side-bar-text">Create</span></a>
+      <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
+      <a class = "create-button" href = "HACreatePage.jsp"><span class = "side-bar-text">Create</span></a>
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
     </div>
     <div class = "addpost-box">
@@ -49,24 +49,26 @@
     </div>
   </body>
   <%
-    try { 
-      String DiscussionOwner = "TestAccount1";
-      String DiscussionTitle = request.getParameter("title-input");
-      String DiscussionContent = request.getParameter("content-input");
-      int DiscussionID = (int)(Math.random() *1000);
-      Class.forName("oracle.jdbc.driver.OracleDriver");
-      Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
-      PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionContent, DiscussionID) values (?,?,?,?)");
-      pstmt.setString(1, DiscussionOwner);
-      pstmt.setString(2,DiscussionTitle);
-      pstmt.setString(3, DiscussionContent);
-      pstmt.setInt(4,DiscussionID);
-      pstmt.executeUpdate();
-      c.commit();
-      
-      c.close();
-    } catch(Exception e) {
-      System.out.println(e);
+    if (request.getMethod().equalsIgnoreCase("POST")) {
+      try { 
+        String DiscussionOwner = "TestAccount1";
+        String DiscussionTitle = request.getParameter("title-input");
+        String DiscussionContent = request.getParameter("content-input");
+        int DiscussionID = (int)(Math.random() *1000);
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+        Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
+        PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionContent, DiscussionID) values (?,?,?,?)");
+        pstmt.setString(1, DiscussionOwner);
+        pstmt.setString(2,DiscussionTitle);
+        pstmt.setString(3, DiscussionContent);
+        pstmt.setInt(4,DiscussionID);
+        pstmt.executeUpdate();
+        c.commit();
+        
+        c.close();
+      } catch(Exception e) {
+        System.out.println(e);
+      }
     }
   %>
   <script>
