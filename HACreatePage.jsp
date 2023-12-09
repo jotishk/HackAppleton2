@@ -49,17 +49,25 @@
     </div>
   </body>
   <%
-    String DiscussionOwner = "TestAccount1";
-    String DiscussionTitle = request.getParameter("title-input");
-    String DiscussionContent = request.getParameter("content-input");
-    int DiscussionID = (int)(Math.random() *1000);
-    Class.forName("oracle.jdbc.driver.OracleDriver");
-    Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
-    PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionContent, DiscussionID) values (?,?,?,?)");
-    pstmt.setString(1, DiscussionOwner);
-    pstmt.setString(2,DiscussionTitle);
-    pstmt.setString(3, DiscussionContent);
-    pstmt.setDiscussionID(4,DiscussionID)
+    try { 
+      String DiscussionOwner = "TestAccount1";
+      String DiscussionTitle = request.getParameter("title-input");
+      String DiscussionContent = request.getParameter("content-input");
+      int DiscussionID = (int)(Math.random() *1000);
+      Class.forName("oracle.jdbc.driver.OracleDriver");
+      Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
+      PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionContent, DiscussionID) values (?,?,?,?)");
+      pstmt.setString(1, DiscussionOwner);
+      pstmt.setString(2,DiscussionTitle);
+      pstmt.setString(3, DiscussionContent);
+      pstmt.setInt(4,DiscussionID);
+      pstmt.executeUpdate();
+      c.commit();
+      
+      c.close();
+    } catch(Exception e) {
+      System.out.println(e);
+    }
   %>
   <script>
     let isSignedIn = true;
