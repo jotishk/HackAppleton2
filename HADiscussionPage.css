@@ -215,12 +215,12 @@ body {
   margin-top: 20px;
   width: 720px;
   
-  background-color: yellow;
+  
 }
 .article-comment {
   width: 720px;
   height: 80px;
-  background-color: green;
+  
   display: flex;
   align-items: center;
 }
@@ -231,9 +231,39 @@ body {
    
 }
 .comment-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50px;
   margin-left: 10px;
 }
-.comment-text {
- 
+.create-comment-box {
+  width: 720px;
+  height: 80px;
+  margin-top: -10px;
+  display: flex;
+  align-items: center;
 }
+.your-comment-profile-image {
+  width: 50px;
+  height:50px;
+  border-radius: 25px;
+  /* margin-top: 15px; */
+}
+.create-comment-input {
+  margin-left: 15px;
+  margin-top: 20px;
+  width: 600px;
+  border-right: none;
+  border-top: none;
+  border-left: none;
+  border-bottom:1px gray solid;
+  background-color: #f9f9f9;
+  outline: none;
+  font-size: 16px;
+}
+.create-comment-input:focus {
+  border-bottom: 3px black solid;
+}
+
 

@@ -60,13 +60,19 @@
       <p class = "body-text"><%=article%></p>
       <div class = "comment-box">
         <p class = "comment-title"># Comments</p>
+        <div class = "create-comment-box">
+          <img class = "your-comment-profile-image" src = "EmptyAvatar.jpg">
+          <form  class = "create-comment-form" style = "display: inline;" enctype="multipart/form-data" action = "HADiscussionPage.jsp" method = "post">
+            <input class = "create-comment-input" type = "text" name = "comment-input">
+          </form>
+          
+        </div>
         <div class = "article-comment">
           <img class = "comment-profile-image" src = "EmptyAvatar.jpg">
           <div class = "comment-content">
-            <p>Test Username</p>
-            <p class = "comment-text">Test Text</p>
+            <p style = "margin: 5px; font-weight: 600; font-family:'Roboto', sans-serif;">Test Username</p>
+            <p style = "margin: 5px; font-family:'Roboto', sans-serif;"   class = "comment-text">Test Text</p>
           </div>
-          
         </div>
       </div>
       
@@ -76,7 +82,16 @@
     let isSignedIn = true;
     const usernameElement = document.querySelector(".username");
     let username = "TestAccount1"
-    
+    const commentInput = document.querySelector(".create-comment-input");
+    let postButton = document.createElement("input");
+    postButton.className = "post-button";
+
+    commentInput.addEventListener("focus", function() {
+      document.querySelector(".create-comment-form").appendChild(postButton);
+    });
+    commentInput.addEventListener("blur", function() {
+      document.querySelector(".create-comment-form").removeChild(postButton);
+    });
     if (isSignedIn) {
       usernameElement.innerText = username;
     }
