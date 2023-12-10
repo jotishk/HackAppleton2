@@ -9,8 +9,10 @@
     <link rel = "stylesheet" href = "HACreatePage.css">
   </head>
   <body>
+    
     <div class = "header">
-      <p class = "logo-name">Website Name</p>
+      <img class = "logo-image" src = "Logo.png">
+      <p class = "logo-name">Student Buzz</p>
       <form enctype="multipart/form-data" action = "HASearchPage.jsp" method = "post">
         <button type = "submit" class="search-button">
         <img class = "search-image" src = "595474_search_512x512.png">
@@ -22,6 +24,7 @@
           <option value="Environment">
           <option value="Social Media Impact">
           <option value="Academic Pressure">
+          <option value="Technology">
         </datalist> 
       </form>
        
@@ -32,8 +35,13 @@
     </div> 
     <div class = "side-bar">
       <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
-      <a class = "create-button" href = "HACreatePage.jsp"><span class = "side-bar-text">Create</span></a>
-      <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
+      <a class = "create-button" href = "HACreatePage.jsp">
+      
+        <span class = "side-bar-text">Create</span>
+      </a>
+      <a class = "discussion-button" href = "">
+        <span class = "side-bar-text">Discussion</span>
+      </a>
       <a class = "search-sidebar-button" href = ""><span class = "side-bar-text">Search</span></a>
     </div>
     <div class = "addpost-box">
@@ -74,6 +82,7 @@
             <option value="Environment">
             <option value="Social Media Impact">
             <option value="Academic Pressure">
+            <option value="Technology">
           </datalist>
         </div>
       </form>

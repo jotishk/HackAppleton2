@@ -62,6 +62,7 @@ body {
   font-family:'Roboto', sans-serif;
   font-size: 20px;
   margin-left: 50px;
+  margin-right: -30px;
 }
 .username {
   font-family:'Roboto', sans-serif;
@@ -261,4 +262,9 @@ body {
 }
 .learn-more-button:hover {
   cursor: pointer;
+}
+.logo-image {
+  width: 43px;
+  margin-left: 30px;
+  margin-right: -30px;
 }
