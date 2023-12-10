@@ -11,6 +11,8 @@
   ArrayList topDiscussion2 = new ArrayList();
   ArrayList topDiscussion3 = new ArrayList();
 
+  String selectedCategory = request.getParameter("search-input");
+
 
   try {
     Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -18,11 +20,14 @@
 
     Statement stmt = c.createStatement();
     Statement stmt2 = c.createStatement();
-    ResultSet DBDiscussionIDs = stmt.executeQuery("select DiscussionID from HADiscussions");
+    ResultSet DBDiscussionIDs = stmt.executeQuery("select * from HADiscussions");
     ResultSet discussionDetails = stmt2.executeQuery("select * from HADiscussions");
     
     while (DBDiscussionIDs.next()) {
-      discussions.add(DBDiscussionIDs.getInt("DiscussionID"));
+      if (DBDiscussionIDs.getString("DiscussionCategory").toLowerCase().equals(selectedCategory.toLowerCase)) {
+        discussions.add(DBDiscussionIDs.getInt("DiscussionID"));
+      }
+      
     }
     DBDiscussionIDs.close();
     
@@ -126,7 +131,7 @@
   <body>
     <div class = "header">
       <p class = "logo-name">Website Name</p>
-      <form enctype="multipart/form-data" action = "HASearchPage.jsp?" method = "post"></form>
+      <form enctype="multipart/form-data" action = "HASearchPage.jsp?value=" method = "post"></form>
         <button type = "submit" class="search-button">
         <img class = "search-image" src = "595474_search_512x512.png">
         </button>
@@ -144,7 +149,7 @@
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
     </div>
     <div class = "dashboard-box">
-      <p class = "tp-text">Top Posts This Week</p>
+      <p class = "tp-text">Results</p>
       <div class = "tp-box">
         <% if (topDiscussion1.size() > 0) { %>
         <div class = "tp-card">

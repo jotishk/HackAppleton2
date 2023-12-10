@@ -246,4 +246,20 @@ body {
 .image-input-button:hover {
   cursor: pointer;
 }
+.select-category-box {
+  position: absolute;
+  background-color: white;
+  top: 500px;
+  left: 1220px;
+  width: 280px;
+  height: 140px;
+  border: black 1px solid;
+  border: none;
+  border-radius: 5px;
+}
+
+.category-input {
+  margin-left: 55px;
+  margin-top: 30px;
+}
 

@@ -5,6 +5,8 @@
   String articleTitle = "";
   String author = "";
   String article = "";
+  String category = "";
+  byte[] imageBytes = new byte[0];
   ArrayList<String[]> commentsList = new ArrayList<>();
   int numberOfComments = 0;
   try {
@@ -22,10 +24,12 @@
         articleTitle = discussions.getString("DiscussionTitle");
         author = discussions.getString("DiscussionOwner");
         article = discussions.getString("DiscussionContent");
+        imageBytes = discussions.getBytes("DiscussionImage");
+        category = discussions.getString("DiscussionCategory");
       }
     }
 
-    
+    category = category.toLowerCase().replace(" ","-");
     while (DBcomments.next()) {
       if (Integer.parseInt(articleID) == DBcomments.getInt("DiscussionID")) {
         commentsList.add(new String[]{DBcomments.getString("CommenterName"), DBcomments.getString("CommentText")});
@@ -51,9 +55,12 @@
   <body>
     <div class = "header">
       <p class = "logo-name">Website Name</p>
-      <button class="search-button">
-      <img class = "search-image" src = "595474_search_512x512.png">
-      </button>
+      <form enctype="multipart/form-data" action = "HASearchPage.jsp?value=" method = "post"></form>
+        <button type = "submit" class="search-button">
+        <img class = "search-image" src = "595474_search_512x512.png">
+        </button>
+        <input name = "search-input" class = "search-bar" placeholder="Search">  
+      </form>
       <input class = "search-bar" placeholder="Search">  
       <div class = "profile">
         <img class = "profile-image" src = "EmptyAvatar.jpg">
@@ -66,7 +73,8 @@
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
     </div>
     <div class = "discussion-box">
-      <img class = "article-image">
+      <div class = "category-box"># <%=category%></div>
+      <img src = "data:image/png;base64,<%=new String(java.util.Base64.getEncoder().encode(imageBytes)) %>" class = "article-image">
       <div class = "article-details">
         <p class = "article-title"><%=articleTitle%></p>
         <div class = "author-details">

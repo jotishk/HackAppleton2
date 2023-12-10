@@ -11,9 +11,12 @@
   <body>
     <div class = "header">
       <p class = "logo-name">Website Name</p>
-      <button class="search-button">
-      <img class = "search-image" src = "595474_search_512x512.png">
-      </button>
+      <form enctype="multipart/form-data" action = "HASearchPage.jsp?" method = "post"></form>
+        <button type = "submit" class="search-button">
+        <img class = "search-image" src = "595474_search_512x512.png">
+        </button>
+        <input name = "search-input" class = "search-bar" placeholder="Search">  
+      </form>
       <input class = "search-bar" placeholder="Search">  
       <div class = "profile">
         <img class = "profile-image" src = "EmptyAvatar.jpg">
@@ -52,6 +55,19 @@
           <input class = "image-input" type ="file" value = "Upload" name = "discussionimage" >
           <button type = "button" onclick = "uploadFile();" class = "image-input-button">Upload Image</button>
         </div>
+        <div class = "select-category-box">
+          <div class = "publish-text-box">
+            <p class = "publish-text">Select Category</p>
+          </div>
+          <input list="categories" class="category-input" name="category" >
+          <datalist id="categories">
+            <option value="Mental Health Awareness">
+            <option value="Bullying and Cyberbullying">
+            <option value="Environment">
+            <option value="Social Media Impact">
+            <option value="Academic Pressure">
+          </datalist>
+        </div>
       </form>
       
     </div>
@@ -64,15 +80,17 @@
         InputStream fin = discussionImage.getInputStream();
         String DiscussionTitle = request.getParameter("title-input");
         String DiscussionContent = request.getParameter("content-input");
+        String DiscussionCategory = request.getParameter("category");
         int DiscussionID = (int)(Math.random() *100000);
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
-        PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionImage, DiscussionContent, DiscussionID) values (?,?,?,?,?)");
+        PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionImage, DiscussionContent, DiscussionID, DiscussionCategory) values (?,?,?,?,?,?)");
         pstmt.setString(1, DiscussionOwner);
         pstmt.setString(2,DiscussionTitle);
         pstmt.setBlob(3,fin);
         pstmt.setString(4, DiscussionContent);
         pstmt.setInt(5,DiscussionID);
+        pstmt.setString(6,DiscussionCategory);
         pstmt.executeUpdate();
         c.commit();
         
