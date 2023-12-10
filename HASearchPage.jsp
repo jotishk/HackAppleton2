@@ -24,7 +24,7 @@
     ResultSet discussionDetails = stmt2.executeQuery("select * from HADiscussions");
     
     while (DBDiscussionIDs.next()) {
-      if (DBDiscussionIDs.getString("DiscussionCategory").toLowerCase().equals(selectedCategory.toLowerCase)) {
+      if (DBDiscussionIDs.getString("DiscussionCategory").toLowerCase().equals(selectedCategory.toLowerCase())) {
         discussions.add(DBDiscussionIDs.getInt("DiscussionID"));
       }
       
@@ -131,11 +131,18 @@
   <body>
     <div class = "header">
       <p class = "logo-name">Website Name</p>
-      <form enctype="multipart/form-data" action = "HASearchPage.jsp?value=" method = "post"></form>
+      <form enctype="multipart/form-data" action = "HASearchPage.jsp" method = "post">
         <button type = "submit" class="search-button">
         <img class = "search-image" src = "595474_search_512x512.png">
         </button>
-        <input name = "search-input" class = "search-bar" placeholder="Search">  
+        <input list = "categories" name = "search-input" class = "search-bar" placeholder="Search"> 
+        <datalist id="categories">
+          <option value="Mental Health Awareness">
+          <option value="Bullying and Cyberbullying">
+          <option value="Environment">
+          <option value="Social Media Impact">
+          <option value="Academic Pressure">
+        </datalist> 
       </form>
       
       <div class = "profile">
