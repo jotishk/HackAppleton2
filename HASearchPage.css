@@ -98,7 +98,7 @@ body {
   left: 0px;
   
   position: absolute;
-  background-color: rgb(61, 198, 198);
+  background-color: rgb(35, 35, 36);
   border: none;
   font-size: 15px;
   color: white;
@@ -232,6 +232,9 @@ body {
   margin-left: 19px;
   margin-top: 10px;
 }
+.learn-more-button:hover {
+  cursor: pointer;
+}
 .tp-comment {
   color: gray;
   font-family:'Roboto', sans-serif;
@@ -242,4 +245,20 @@ body {
 .tp-image {
   width: 300px;
   height: 225px;
+}
+.search-sidebar-button {
+  top: 180px;
+  right: 0px;
+  left: 0px;
+  position: absolute;
+  
+  background-color: rgb(61, 198, 198);
+  border: none;
+  font-size: 15px;
+  color: white;
+  font-family:'Roboto', sans-serif;
+  font-weight:bold;
+  text-decoration: none;
+  padding-left: 30px;
+  height: 50px;
 }

@@ -24,7 +24,7 @@
           <option value="Academic Pressure">
         </datalist> 
       </form>
-      <input class = "search-bar" placeholder="Search">  
+       
       <div class = "profile">
         <img class = "profile-image" src = "EmptyAvatar.jpg">
         <p class = "username"></p>
@@ -34,6 +34,7 @@
       <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
       <a class = "create-button" href = "HACreatePage.jsp"><span class = "side-bar-text">Create</span></a>
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
+      <a class = "search-sidebar-button" href = ""><span class = "side-bar-text">Search</span></a>
     </div>
     <div class = "addpost-box">
       <p class = "title-text">Add New Discussion</p>
@@ -110,7 +111,7 @@
   <script>
     let isSignedIn = true;
     const usernameElement = document.querySelector(".username");
-    let username = "TestAccount1"
+    let username = "TestAccount"
     
     if (isSignedIn) {
       usernameElement.innerText = username;

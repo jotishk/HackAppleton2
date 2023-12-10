@@ -29,6 +29,7 @@
       }
       
     }
+    
     DBDiscussionIDs.close();
     
      for (int i: discussions) {
@@ -68,51 +69,59 @@
       
       if (discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(0)[0])) {
         
-        topDiscussion1.add(discussionDetails.getInt("DiscussionID"));
-        topDiscussion1.add(topDiscussions.get(0)[1]);
-        topDiscussion1.add(discussionDetails.getString("DiscussionOwner"));
-        topDiscussion1.add(discussionDetails.getString("DiscussionTitle"));
-        String descriptionWhole = discussionDetails.getString("DiscussionContent");
-        String description;
-        if (descriptionWhole.length() >100) {
-          description = descriptionWhole.substring(0,100)+ "...";
-        } else {
-          description = descriptionWhole;
-        }
-        topDiscussion1.add(description);
-        topDiscussion1.add(discussionDetails.getString("DiscussionTitle"));
-        topDiscussion1.add(discussionDetails.getBytes("DiscussionImage"));
+          topDiscussion1.add(discussionDetails.getInt("DiscussionID"));
+          
+          topDiscussion1.add(topDiscussions.get(0)[1]);
+          
+          topDiscussion1.add(discussionDetails.getString("DiscussionOwner"));
+          topDiscussion1.add(discussionDetails.getString("DiscussionTitle"));
+          String descriptionWhole = discussionDetails.getString("DiscussionContent");
+          String description;
+          if (descriptionWhole.length() >100) {
+            description = descriptionWhole.substring(0,100)+ "...";
+          } else {
+            description = descriptionWhole;
+          }
+          topDiscussion1.add(description);
+          topDiscussion1.add(discussionDetails.getString("DiscussionTitle"));
+          topDiscussion1.add(discussionDetails.getBytes("DiscussionImage"));
         
-      } else if (discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(1)[0])) {
-        topDiscussion2.add(discussionDetails.getInt("DiscussionID"));
-        topDiscussion2.add(topDiscussions.get(1)[1]);
-        topDiscussion2.add(discussionDetails.getString("DiscussionOwner"));
-        topDiscussion2.add(discussionDetails.getString("DiscussionTitle"));
-        String descriptionWhole = discussionDetails.getString("DiscussionContent");
-        String description;
-        if (descriptionWhole.length() >100) {
-          description = descriptionWhole.substring(0,100)+ "...";
-        } else {
-          description = descriptionWhole;
-        }
-        topDiscussion2.add(description);
-        topDiscussion2.add(discussionDetails.getString("DiscussionTitle"));
-        topDiscussion2.add(discussionDetails.getBytes("DiscussionImage"));
-      } else if (discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(2)[0])) {
-        topDiscussion3.add(discussionDetails.getInt("DiscussionID"));
-        topDiscussion3.add(topDiscussions.get(2)[1]);
-        topDiscussion3.add(discussionDetails.getString("DiscussionOwner"));
-        topDiscussion3.add(discussionDetails.getString("DiscussionTitle"));
-        String descriptionWhole = discussionDetails.getString("DiscussionContent");
-        String description;
-        if (descriptionWhole.length() >100) {
-          description = descriptionWhole.substring(0,100)+ "...";
-        } else {
-          description = descriptionWhole;
-        }
-        topDiscussion3.add(description);
-        topDiscussion3.add(discussionDetails.getString("DiscussionTitle"));
-        topDiscussion3.add(discussionDetails.getBytes("DiscussionImage"));
+        
+        
+      } else if (topDiscussions.size() > 1 && discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(1)[0])) {
+       
+          topDiscussion2.add(discussionDetails.getInt("DiscussionID"));
+          topDiscussion2.add(topDiscussions.get(1)[1]);
+          topDiscussion2.add(discussionDetails.getString("DiscussionOwner"));
+          topDiscussion2.add(discussionDetails.getString("DiscussionTitle"));
+          String descriptionWhole = discussionDetails.getString("DiscussionContent");
+          String description;
+          if (descriptionWhole.length() >100) {
+            description = descriptionWhole.substring(0,100)+ "...";
+          } else {
+            description = descriptionWhole;
+          }
+          topDiscussion2.add(description);
+          topDiscussion2.add(discussionDetails.getString("DiscussionTitle"));
+          topDiscussion2.add(discussionDetails.getBytes("DiscussionImage"));
+        
+      } else if (topDiscussions.size() > 2 &&  discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(2)[0])) {
+       
+          topDiscussion3.add(discussionDetails.getInt("DiscussionID"));
+          topDiscussion3.add(topDiscussions.get(2)[1]);
+          topDiscussion3.add(discussionDetails.getString("DiscussionOwner"));
+          topDiscussion3.add(discussionDetails.getString("DiscussionTitle"));
+          String descriptionWhole = discussionDetails.getString("DiscussionContent");
+          String description;
+          if (descriptionWhole.length() >100) {
+            description = descriptionWhole.substring(0,100)+ "...";
+          } else {
+            description = descriptionWhole;
+          }
+          topDiscussion3.add(description);
+          topDiscussion3.add(discussionDetails.getString("DiscussionTitle"));
+          topDiscussion3.add(discussionDetails.getBytes("DiscussionImage"));
+        
       }
     }
   
@@ -154,6 +163,8 @@
       <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
       <a class = "create-button" href = "HACreatePage.jsp"><span class = "side-bar-text">Create</span></a>
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
+      <a class = "search-sidebar-button" href = ""><span class = "side-bar-text">Search</span></a>
+
     </div>
     <div class = "dashboard-box">
       <p class = "tp-text">Results</p>
@@ -177,7 +188,7 @@
           <div class = "tp-comment"><%= topDiscussion1.get(1)%> Comments</div>
         </div>
         <% } %>
-        <% if (topDiscussion2.size() > 0) { %>
+        <%  if (topDiscussion2.size() > 0) { %>
         <div style = "margin-left: 100px;"class = "tp-card">
           <div class = "tp-image-box">
             <img src = "data:image/png;base64,<%=new String(java.util.Base64.getEncoder().encode((byte[])topDiscussion2.get(6))) %>" class = "tp-image">
@@ -221,7 +232,7 @@
   <script>
     let isSignedIn = true;
     const usernameElement = document.querySelector(".username");
-    let username = "TestAccount1"
+    let username = "TestAccount"
     
     if (isSignedIn) {
       usernameElement.innerText = username;

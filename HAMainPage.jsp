@@ -149,6 +149,8 @@
       <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
       <a class = "create-button" href = "HACreatePage.jsp"><span class = "side-bar-text">Create</span></a>
       <a class = "discussion-button" href = ""><span class = "side-bar-text">Discussion</span></a>
+      <a class = "search-sidebar-button" href = ""><span class = "side-bar-text">Search</span></a>
+
     </div>
     <div class = "dashboard-box">
       <p class = "tp-text">Top Posts This Week</p>
@@ -216,7 +218,7 @@
   <script>
     let isSignedIn = true;
     const usernameElement = document.querySelector(".username");
-    let username = "TestAccount1"
+    let username = "TestAccount"
     
     if (isSignedIn) {
       usernameElement.innerText = username;
