@@ -159,6 +159,8 @@
   height: 30px;
   font-size: 20px;
   font-family:'Roboto', sans-serif;
+  border: none;
+  border-radius: 5px;
 }
 .text-box {
   margin-top: 50px;
@@ -167,6 +169,8 @@
   height: 400px;
   font-size: 15px;
   font-family:'Roboto', sans-serif;
+  border: none;
+  border-radius: 5px;
 }
 .submit-box {
   position: absolute;
@@ -176,6 +180,8 @@
   width: 280px;
   height: 140px;
   border: black 1px solid;
+  border: none;
+  border-radius: 5px;
 }
 .publish-text {
   margin-left: 10px;
@@ -205,7 +211,39 @@
   border: none;
   color: white;
 }
+.publish-button:hover {
+  cursor: pointer;
+}
 body {
   background-color: rgb(242, 242, 242);
   overflow: hidden;
 }
+.add-image-box {
+  position: absolute;
+  background-color: white;
+  top: 320px;
+  left: 1220px;
+  width: 280px;
+  height: 140px;
+  border: black 1px solid;
+  border: none;
+  border-radius: 5px;
+}
+.image-input {
+  display: none;
+}
+.image-input-button {
+  height: 40px;
+  width: 100px;
+  font-family:'Roboto', sans-serif;
+  margin-left: 90px;
+  margin-top: 25px;
+  background-color: rgb(83, 178, 255);
+  border: none;
+  color: white;
+  
+}
+.image-input-button:hover {
+  cursor: pointer;
+}
+

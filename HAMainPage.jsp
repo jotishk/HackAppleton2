@@ -5,36 +5,118 @@
 <%
   ArrayList<Integer> discussions = new ArrayList<>();
   ArrayList<String[]> discussionAndComments = new ArrayList<>();
-  ArrayList<Integer> topDiscussions = new ArrayList<>();
+  ArrayList<String[]> topDiscussions = new ArrayList<>();
+
+  ArrayList topDiscussion1 = new ArrayList();
+  ArrayList topDiscussion2 = new ArrayList();
+  ArrayList topDiscussion3 = new ArrayList();
+
 
   try {
     Class.forName("oracle.jdbc.driver.OracleDriver");
     Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");
 
     Statement stmt = c.createStatement();
+    Statement stmt2 = c.createStatement();
     ResultSet DBDiscussionIDs = stmt.executeQuery("select DiscussionID from HADiscussions");
+    ResultSet discussionDetails = stmt2.executeQuery("select * from HADiscussions");
     
     while (DBDiscussionIDs.next()) {
       discussions.add(DBDiscussionIDs.getInt("DiscussionID"));
     }
-
-    for (int i: discussions) {
-      PreparedStatement pstmt = c.prepareStatement("select Count(*) as commentCount from HAComments where DiscussionID = ?");
+    DBDiscussionIDs.close();
+    
+     for (int i: discussions) {
+      PreparedStatement pstmt = c.prepareStatement("select Count(*) as commentCount from HAComments where DiscussionID = ?", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       pstmt.setInt(1,i);
       ResultSet amountOfComments = pstmt.executeQuery();
       if (amountOfComments.next()) {
         discussionAndComments.add(new String[]{String.valueOf(i), String.valueOf(amountOfComments.getInt("commentCount"))});
       }
-      
-      
-
-      amountOfComments.close();
-      pstmt.close();
+      amountOfComments.first();
+       
     }
-   
+    
+    
+
+    for (String[] s: discussionAndComments) {
+      if (topDiscussions.size() <3) {
+        topDiscussions.add(new String[]{s[0],s[1]});
+      } else {
+        for (String[] w : topDiscussions) {
+          if (Integer.parseInt(s[1]) < Integer.parseInt(w[1])) {
+            continue;
+          } else {
+            for (int i=0; i<topDiscussions.size();i++) {
+              if (Arrays.equals(new String[]{w[0],w[1]}, topDiscussions.get(i))) {
+                topDiscussions.remove(i);
+              }
+            }
+            topDiscussions.add(new String[]{s[0],s[1]});
+            break;
+          }
+        }
+      }
+    }
+    
+    while (discussionDetails.next()) {
+      
+      if (discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(0)[0])) {
+        
+        topDiscussion1.add(discussionDetails.getInt("DiscussionID"));
+        topDiscussion1.add(topDiscussions.get(0)[1]);
+        topDiscussion1.add(discussionDetails.getString("DiscussionOwner"));
+        topDiscussion1.add(discussionDetails.getString("DiscussionTitle"));
+        String descriptionWhole = discussionDetails.getString("DiscussionContent");
+        String description;
+        if (descriptionWhole.length() >100) {
+          description = descriptionWhole.substring(0,100)+ "...";
+        } else {
+          description = descriptionWhole;
+        }
+        topDiscussion1.add(description);
+        topDiscussion1.add(discussionDetails.getString("DiscussionTitle"));
+        topDiscussion1.add(discussionDetails.getBytes("DiscussionImage"));
+        
+      } else if (discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(1)[0])) {
+        topDiscussion2.add(discussionDetails.getInt("DiscussionID"));
+        topDiscussion2.add(topDiscussions.get(1)[1]);
+        topDiscussion2.add(discussionDetails.getString("DiscussionOwner"));
+        topDiscussion2.add(discussionDetails.getString("DiscussionTitle"));
+        String descriptionWhole = discussionDetails.getString("DiscussionContent");
+        String description;
+        if (descriptionWhole.length() >100) {
+          description = descriptionWhole.substring(0,100)+ "...";
+        } else {
+          description = descriptionWhole;
+        }
+        topDiscussion2.add(description);
+        topDiscussion2.add(discussionDetails.getString("DiscussionTitle"));
+        topDiscussion2.add(discussionDetails.getBytes("DiscussionImage"));
+      } else if (discussionDetails.getInt("DiscussionID") == Integer.parseInt(topDiscussions.get(2)[0])) {
+        topDiscussion3.add(discussionDetails.getInt("DiscussionID"));
+        topDiscussion3.add(topDiscussions.get(2)[1]);
+        topDiscussion3.add(discussionDetails.getString("DiscussionOwner"));
+        topDiscussion3.add(discussionDetails.getString("DiscussionTitle"));
+        String descriptionWhole = discussionDetails.getString("DiscussionContent");
+        String description;
+        if (descriptionWhole.length() >100) {
+          description = descriptionWhole.substring(0,100)+ "...";
+        } else {
+          description = descriptionWhole;
+        }
+        topDiscussion3.add(description);
+        topDiscussion3.add(discussionDetails.getString("DiscussionTitle"));
+        topDiscussion3.add(discussionDetails.getBytes("DiscussionImage"));
+      }
+    }
+  
+    discussionDetails.close(); 
+    
+    
     
   } catch (Exception e) {
-    System.out.println(e);
+    e.printStackTrace();
   }
 %>
 <html>
@@ -61,57 +143,63 @@
     <div class = "dashboard-box">
       <p class = "tp-text">Top Posts This Week</p>
       <div class = "tp-box">
+        <% if (topDiscussion1.size() > 0) { %>
         <div class = "tp-card">
           <div class = "tp-image-box">
-            
+            <img src = "data:image/png;base64,<%=new String(java.util.Base64.getEncoder().encode((byte[])topDiscussion1.get(6))) %>" class = "tp-image">
           </div>
           <div class = "author-box">
             <img class = "author-image" src = "EmptyAvatar.jpg">
-            <p class = "author-username">Example Username</p>
+            <p class = "author-username"><%=topDiscussion1.get(2)%></p>
           </div>
-          <div class = "tp-title">Title</div>
-          <div class = "tp-description">Example Description Example Description Example Description Example Description Example Descri...</div>
+          <div class = "tp-title"><%=topDiscussion1.get(3)%></div>
+          <div class = "tp-description"><%=topDiscussion1.get(4)%></div>
           <div class = "learn-more-box">
-            <a>
+            <a href = "HADiscussionPage.jsp?value=<%=topDiscussion1.get(0)%>">
               <button class = "learn-more-button">Learn More</button>
             </a>
           </div>
-          <div class = "tp-comment"># Comments</div>
+          <div class = "tp-comment"><%= topDiscussion1.get(1)%> Comments</div>
         </div>
-        <div class = "tp-card">
+        <% } %>
+        <% if (topDiscussion2.size() > 0) { %>
+        <div style = "margin-left: 100px;"class = "tp-card">
           <div class = "tp-image-box">
-            
+            <img src = "data:image/png;base64,<%=new String(java.util.Base64.getEncoder().encode((byte[])topDiscussion2.get(6))) %>" class = "tp-image">
           </div>
           <div class = "author-box">
             <img class = "author-image" src = "EmptyAvatar.jpg">
-            <p class = "author-username">Example Username</p>
+            <p class = "author-username"><%=topDiscussion2.get(2)%></p>
           </div>
-          <div class = "tp-title">Title</div>
-          <div class = "tp-description">Example Description Example Description Example Description Example Description Example Descri...</div>
+          <div class = "tp-title"><%=topDiscussion2.get(3)%></div>
+          <div class = "tp-description"><%=topDiscussion2.get(4)%></div>
           <div class = "learn-more-box">
-            <a>
+            <a href = "HADiscussionPage.jsp?value=<%=topDiscussion2.get(0)%>">
               <button class = "learn-more-button">Learn More</button>
             </a>
           </div>
-          <div class = "tp-comment"># Comments</div>
+          <div class = "tp-comment"><%=topDiscussion2.get(1)%> Comments</div>
         </div>
-        <div class = "tp-card">
+        <% } %>
+        <% if (topDiscussion3.size() > 0) { %>
+        <div style = "margin-left: 100px;" class = "tp-card">
           <div class = "tp-image-box">
-            
+            <img src = "data:image/png;base64,<%=new String(java.util.Base64.getEncoder().encode((byte[])topDiscussion3.get(6))) %>" class = "tp-image">
           </div>
           <div class = "author-box">
             <img class = "author-image" src = "EmptyAvatar.jpg">
-            <p class = "author-username">Example Username</p>
+            <p class = "author-username"><%=topDiscussion3.get(2)%></p>
           </div>
-          <div class = "tp-title">Title</div>
-          <div class = "tp-description">Example Description Example Description Example Description Example Description Example Descri...</div>
+          <div class = "tp-title"><%=topDiscussion3.get(3)%></div>
+          <div class = "tp-description"><%=topDiscussion3.get(4)%></div>
           <div class = "learn-more-box">
-            <a>
+            <a href = "HADiscussionPage.jsp?value=<%=topDiscussion3.get(0)%>">
               <button class = "learn-more-button">Learn More</button>
             </a>
           </div>
-          <div class = "tp-comment"># Comments</div>
+          <div class = "tp-comment"><%=topDiscussion3.get(1)%> Comments</div>
         </div>
+        <% } %>
       </div>
     </div>
   </body>

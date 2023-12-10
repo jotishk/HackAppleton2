@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="java.io.*" %>
 
 <html>
   <!-- Add image and about panels on side-->
@@ -44,6 +45,13 @@
           <button class = "save-button">Save Draft</button>
           <input class = "publish-button" type = "submit" value = "Publish">
         </div>
+        <div class = "add-image-box">
+          <div class = "publish-text-box">
+            <p class = "publish-text">Add a thumbnail</p>
+          </div>
+          <input class = "image-input" type ="file" value = "Upload" name = "discussionimage" >
+          <button type = "button" onclick = "uploadFile();" class = "image-input-button">Upload Image</button>
+        </div>
       </form>
       
     </div>
@@ -52,16 +60,19 @@
     if (request.getMethod().equalsIgnoreCase("POST")) {
       try { 
         String DiscussionOwner = "TestAccount1";
+        Part discussionImage = request.getPart("discussionimage");
+        InputStream fin = discussionImage.getInputStream();
         String DiscussionTitle = request.getParameter("title-input");
         String DiscussionContent = request.getParameter("content-input");
         int DiscussionID = (int)(Math.random() *100000);
         Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "orcl");      
-        PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionContent, DiscussionID) values (?,?,?,?)");
+        PreparedStatement pstmt = c.prepareStatement("insert into HADiscussions(DiscussionOwner, DiscussionTitle, DiscussionImage, DiscussionContent, DiscussionID) values (?,?,?,?,?)");
         pstmt.setString(1, DiscussionOwner);
         pstmt.setString(2,DiscussionTitle);
-        pstmt.setString(3, DiscussionContent);
-        pstmt.setInt(4,DiscussionID);
+        pstmt.setBlob(3,fin);
+        pstmt.setString(4, DiscussionContent);
+        pstmt.setInt(5,DiscussionID);
         pstmt.executeUpdate();
         c.commit();
         
@@ -78,6 +89,11 @@
     
     if (isSignedIn) {
       usernameElement.innerText = username;
+    }
+
+    const imageInput = document.querySelector(".image-input");
+    function uploadFile() {
+      imageInput.click();
     }
   </script>
 </hmtl>

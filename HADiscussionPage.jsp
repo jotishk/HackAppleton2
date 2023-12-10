@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<%String articleID = request.getParameter("value");%>
 <%
-  String articleID = "895";
+  
   String articleTitle = "";
   String author = "";
   String article = "";
   ArrayList<String[]> commentsList = new ArrayList<>();
-
+  int numberOfComments = 0;
   try {
     
     Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -26,7 +27,10 @@
 
     
     while (DBcomments.next()) {
-      commentsList.add(new String[]{DBcomments.getString("CommenterName"), DBcomments.getString("CommentText")});
+      if (Integer.parseInt(articleID) == DBcomments.getInt("DiscussionID")) {
+        commentsList.add(new String[]{DBcomments.getString("CommenterName"), DBcomments.getString("CommentText")});
+        numberOfComments++;
+      }
     }
     
   } catch (Exception e) {
@@ -73,10 +77,10 @@
       </div>
       <p class = "body-text"><%=article%></p>
       <div class = "comment-box">
-        <p class = "comment-title"># Comments</p>
+        <p class = "comment-title"><%=numberOfComments%> Comments</p>
         <div class = "create-comment-box">
           <img class = "your-comment-profile-image" src = "EmptyAvatar.jpg">
-          <form  class = "create-comment-form" style = "display: inline;" enctype="multipart/form-data" action = "HADiscussionPage.jsp" method = "post">
+          <form  class = "create-comment-form" style = "display: inline;" enctype="multipart/form-data" action = "HADiscussionPage.jsp?value=<%=articleID%>" method = "post">
             <input class = "create-comment-input" type = "text" name = "comment-input">
           </form>
           
