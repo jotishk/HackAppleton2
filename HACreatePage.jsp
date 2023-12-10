@@ -9,7 +9,7 @@
     <link rel = "stylesheet" href = "HACreatePage.css">
   </head>
   <body>
-    
+    <!-- # this is the header-->
     <div class = "header">
       <img class = "logo-image" src = "Logo.png">
       <p class = "logo-name">Student Buzz</p>
@@ -33,6 +33,7 @@
         <p class = "username"></p>
       </div>
     </div> 
+    
     <div class = "side-bar">
       <a class = "dashboard-button" href = "HAMainPage.jsp"><span class = "side-bar-text">Dashboard</span></a>
       <a class = "create-button" href = "HACreatePage.jsp">
@@ -45,6 +46,7 @@
       <a class = "search-sidebar-button" href = ""><span class = "side-bar-text">Search</span></a>
     </div>
     <div class = "addpost-box">
+      
       <p class = "title-text">Add New Discussion</p>
       <form enctype="multipart/form-data" action = "HACreatePage.jsp" method = "post">
         <!-- <input class = "set-anonymous"> -->
